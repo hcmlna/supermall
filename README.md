@@ -67,3 +67,48 @@ module.exports = {
 
    (3)   访问localhost即可
 
+5. 使用Vant组件
+(1) 安装： npm i vant -S
+(2) 自动按需引入组件
+babel-plugin-import 是一款 babel 插件，它会在编译过程中将 import 的写法自动转换为按需引入的方式。
+i.  安装插件
+npm i babel-plugin-import -D
+
+ii. 在.babelrc 中添加配置
+{
+  "plugins": [
+    ["import", {
+      "libraryName": "vant",
+      "libraryDirectory": "es",
+      "style": true
+    }]
+  ]
+}
+(3) 在components文件夹中创建vant/index.js
+// 在这里引入Vant组件中的内容
+
+import Vue from 'vue'
+
+import {
+  Button,
+  Toast,
+  Dialog,
+  Field,
+} from 'vant'
+
+Vue.use(Toast)
+  .use(Dialog)
+  .use(Field)
+  .use(Button)
+
+  (4) 在main.js中引入
+// ES6模块化直接引入： 可以直接用 import 'filename'; 这种写法来执行目标文件而不引入内容， 且多书写此代码只会执行一次（即在单类模式中只实际执行一次代码， 之后每次返回（若为import xx from xx形式）第一次执行所创建的实例）
+
+import 'components/vant'
+
+（5）在组件中直接使用（具体使用方式需要查看官方文档）
+    <van-button type="default">默认按钮</van-button>
+    <van-button type="primary" @click="clickButton">主要按钮</van-button>
+    <van-button type="info">信息按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+    <van-button type="danger">危险按钮</van-button>
